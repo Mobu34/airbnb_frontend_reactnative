@@ -13,7 +13,7 @@ import axios from "axios";
 
 const airbnbLogo = require("../assets/airbnb-logo.png");
 
-const SignUpScreen = ({ navigation }) => {
+const SignUpScreen = ({ navigation, connection }) => {
   const [email, setEmail] = useState("");
   const [username, setUsername] = useState("");
   const [description, setDescription] = useState("");
@@ -46,11 +46,10 @@ const SignUpScreen = ({ navigation }) => {
           );
 
           if (response.status === 200) {
-            console.log(response);
-            alert("Account created");
+            connection(response.data.token);
           }
         } catch (error) {
-          console.log(error);
+          console.log(error.response);
         }
       }
     }

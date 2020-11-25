@@ -13,7 +13,7 @@ import axios from "axios";
 
 const airbnbLogo = require("../assets/airbnb-logo.png");
 
-const SignInScreen = ({ navigation, setToken }) => {
+const SignInScreen = ({ navigation, setToken, connection }) => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
@@ -32,12 +32,11 @@ const SignInScreen = ({ navigation, setToken }) => {
         );
 
         if (response.status === 200) {
-          console.log(response.data);
+          connection(response.data.token);
           alert("Connected");
-          setToken(true);
         }
       } catch (error) {
-        console.log(error);
+        console.log(error.response);
       }
     }
   };
